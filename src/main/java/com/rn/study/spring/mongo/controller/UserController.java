@@ -1,7 +1,11 @@
 package com.rn.study.spring.mongo.controller;
 
+import com.rn.study.spring.mongo.dto.PageDto;
 import com.rn.study.spring.mongo.dto.UserDto;
+import com.rn.study.spring.mongo.model.PagingAndSortingRequest;
+import com.rn.study.spring.mongo.model.User;
 import com.rn.study.spring.mongo.service.UserService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
@@ -37,4 +41,8 @@ public class UserController {
         return userService.delete(id);
     }
 
+    @PostMapping("/getAll")
+    public Mono<PageDto<User>> findAll(@RequestBody PagingAndSortingRequest pagingAndSortingRequest) {
+        return userService.findAll(pagingAndSortingRequest);
+    }
 }
